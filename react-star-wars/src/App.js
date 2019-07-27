@@ -7,12 +7,12 @@ import HomeScreen from './components/home/home';
 class App extends Component {
    render() {
       return (
-        <Router>
+       <Router>
           <Switch>
-             <Route path='/home' component={HomeScreen} />
-              <Route path='*' component={LoginScreen} />
+               <Route exact path='/' component={LoginScreen} />
+               <Route path='/home' component={HomeScreen} />
           </Switch>
-        </Router>
+       </Router>
    );
   }
 }

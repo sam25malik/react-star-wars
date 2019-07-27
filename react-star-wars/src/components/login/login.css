@@ -34,7 +34,7 @@ body {
 	margin-bottom: 30px;
 }
 
-.form-control {
+.login-input {
 	position: relative;
 	font-size: 16px;
 	height: auto;
@@ -72,7 +72,7 @@ input[type="password"] {
   font-weight: bold;
 }
 
-.form-control {
+.login-input {
   min-width: 283px;
   padding: 8px;
   border: solid 2px white;
@@ -83,18 +83,18 @@ input[type="password"] {
   text-align: center;
 }
 
-.form-control::placeholder {
+.login-input::placeholder {
   color: white;
   opacity: 0.5;
 }
 
-.form-control:focus {
+.login-input:focus {
   -webkit-focus-ring-color: none;
   outline: none;
 }
 
 @media (max-width: 445px) {
-  .form-control {
+  .login-input {
     min-width: auto;
     width: 80%;
   }

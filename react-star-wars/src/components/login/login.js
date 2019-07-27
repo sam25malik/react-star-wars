@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import cookie from 'react-cookies';
 import './login.css';
 
 class LoginScreen extends Component {
@@ -33,31 +34,35 @@ class LoginScreen extends Component {
   }
 
   displayError() {
-    const inputs = document.querySelectorAll('input');
-    let isFormValid = true;
+    var get_input = document.querySelectorAll('input');
+    var check = true;
 
-    inputs.forEach(input => {
-      input.classList.add('active');
+    get_input.forEach(value => {
+      value.classList.add('active');
 
-      const isInputValid = this.checkInput(input);
+      var check_input = this.checkInput(value);
 
-      if (!isInputValid) {
-        isFormValid = false;
+      if (!check_input) 
+      {
+        check = false;
       }
     });
 
-    return isFormValid;
+    return check;
   }
 
-  checkInput(input) {
-    const name = input.name;
-    const validity = input.validity;
-    const label = document.getElementById(`${name}`).placeholder;
-    const error = document.getElementById(`${name}Error`);
+  checkInput(value) 
+  {
+    var name = value.name;
+    var validity = value.validity;
+    var missing = document.getElementById(`${name}`).placeholder;
+    var error = document.getElementById(`${name}Error`);
 
-    if (!validity.valid) {
-      if (validity.valueMissing) {
-        error.textContent = `${label} is a required field`;
+    if (!validity.valid) 
+    {
+      if (validity.valueMissing) 
+      {
+        error.textContent = `${missing} is a required field`;
       }
       return false;
     }
@@ -78,14 +83,15 @@ class LoginScreen extends Component {
       return response.json();
     }).then(response => {
       console.log('Response: ', response);
-      if (response.results) {
+      if (response.count!=0) {
       	console.log(response.results);
         let name = response.results[0].name;
         let birthYear = response.results[0].birth_year;
        	if(username.toLowerCase() === name.toLowerCase() && password === birthYear)
       	{
       		authenticated=true;
-      		that.setState({ toHome: true })
+      		cookie.save('user_id',username, { path: '/' });
+			that.setState({ toHome: true })
       		console.log('Log In successfull!');
       	}
       	else
@@ -94,6 +100,11 @@ class LoginScreen extends Component {
       		alert('Invalid Credentials!');
       	}
       }
+      else
+      {
+      		authenticated=false;
+      		alert('Invalid Credentials!');	
+      }
      return authenticated;
     }).catch(error => console.log('Error fetching data:', error));
 
@@ -101,19 +112,19 @@ class LoginScreen extends Component {
 
    render() {
    	 if (this.state.toHome === true) {
-      return <Redirect to={{pathname: "/home", data: this.state.name }}/>
+      return <Redirect to={{pathname: "/home" }}/>
     }
       return (
         <div className="container">
           <div className="box">
-            <form onSubmit={this.handleSubmit} noValidate autoComplete="off">
+            <form onSubmit={this.handleSubmit} noValidate>
               <div className="formStyle">
                 <h3 className="heading">
                   Login In
                 </h3>
                 <input
                   type="text"
-                  className="form-control"
+                  className="login-input"
                   id="userName"
                   name="userName"
                   placeholder="User Name"
@@ -125,7 +136,7 @@ class LoginScreen extends Component {
                 <div className="error" id="userNameError" />
                 <input
                   type="password"
-                  className="form-control"
+                  className="login-input"
                   id="password"
                   name="password"
                   placeholder="Password"

@@ -1,0 +1,95 @@
+.topcorner{
+   position:absolute;
+   top:10px;
+   right:10px;
+}
+
+.headerHome{
+	position: absolute;
+	top: 40px;
+	font-size: 34px;
+	left: 37%;
+}
+
+a{
+	color:white;
+	text-decoration: none;
+}
+
+a:hover{
+	color:blue;
+}
+
+.search{
+  margin-top:200px;
+}
+
+.search-bar {
+  min-width: 283px;
+  padding: 8px;
+  border: solid 2px #0014ff;
+  border-radius: 4px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  background: black;
+}
+
+.search-bar::placeholder {
+  color: white;
+}
+
+.search-bar:focus {
+  -webkit-focus-ring-color: none;
+  outline: none;
+}
+
+@media (min-width:700px) and (max-width: 800px) {
+   .headerHome{
+	position: absolute;
+	top: 10px;
+	font-size: 34px;
+	left: 28%;
+	}
+
+}
+
+@media (min-width:850px) and (max-width: 1050px) {
+   .headerHome{
+	position: absolute;
+	top: 10px;
+	font-size: 34px;
+	left: 33%;
+	}
+
+}
+
+
+@media (max-width: 445px) {
+
+	.headerHome{
+	position: absolute;
+	top: 20px;
+	font-size: 34px;
+	left: 10%;
+	}
+
+  .search-bar {
+    min-width: auto;
+    width: 80%;
+  }
+
+	.search{
+	  margin-top:250px;
+	}
+
+}
+
+
+
+@media (max-width: 380px) {
+	.search{
+	  margin-top:280px;
+	}
+
+}
